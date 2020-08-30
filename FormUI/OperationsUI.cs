@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Business.Abstract;
+using Business.Concrete;
+using DataAccess.Concrete.ORMs.EntityFramework.DataAccessLayers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,25 @@ namespace FormUI
 {
     public partial class OperationsUI : Form
     {
+
+        IProductService _productManager;
         public OperationsUI()
         {
             InitializeComponent();
+            _productManager=  new ProductManager(new EfProductDal());
         }
+
+        private void OperationsUI_Load(object sender, EventArgs e)
+        {
+            LoadDgwList();
+
+        }
+
+        private void LoadDgwList()
+        {
+            var productList = _productManager.GetAll();
+            dgwList.DataSource = productList;
+        }
+
     }
 }
