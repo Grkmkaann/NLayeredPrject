@@ -71,6 +71,7 @@
             this.tbxNameUpdate = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblNameUpdate = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwList)).BeginInit();
             this.gbxAdd.SuspendLayout();
             this.gbxUpdate.SuspendLayout();
@@ -86,7 +87,7 @@
             this.dgwList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwList.Location = new System.Drawing.Point(12, 34);
             this.dgwList.Name = "dgwList";
-            this.dgwList.Size = new System.Drawing.Size(1393, 361);
+            this.dgwList.Size = new System.Drawing.Size(1393, 345);
             this.dgwList.TabIndex = 0;
             this.dgwList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwList_CellClick);
             // 
@@ -504,11 +505,22 @@
             this.lblNameUpdate.Text = "Name";
             this.lblNameUpdate.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(1258, 385);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(141, 23);
+            this.btnDelete.TabIndex = 11;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // OperationsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1417, 739);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.gbxUpdate);
             this.Controls.Add(this.gbxAdd);
             this.Controls.Add(this.dgwList);
@@ -570,6 +582,7 @@
         private System.Windows.Forms.Label lblNameUpdate;
         private System.Windows.Forms.DateTimePicker dtpDismissDateUpdate;
         private System.Windows.Forms.Label lblDismissDate;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
 

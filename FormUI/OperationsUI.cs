@@ -186,12 +186,7 @@ namespace FormUI
                 
                 }
             }
-
-
             LoadDgwList();
-
-
-
         }
 
 
@@ -274,8 +269,26 @@ namespace FormUI
             _dismissDate = true;
         }
 
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgwList.CurrentRow != null)
+            {
+                try
+                {
+                    _workerManager.Delete(new Worker
+                    {
+                        RecordNumber = Convert.ToInt32(dgwList.CurrentRow.Cells[0].Value)
+                    });
+                    MessageBox.Show("Record Deleted");
+                    LoadDgwList();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
 
-
+            }
+        }
     }
 
 

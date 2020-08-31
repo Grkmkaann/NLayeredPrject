@@ -15,7 +15,7 @@ namespace DataAccess.Abstract.Repositories
         T Get(Expression<Func<T,bool>> expression);
         bool Add(T entity);
         bool Update(T entity);
-        void Delete(T entity);
+        bool Delete(T entity);
 
     }
 }

@@ -15,5 +15,7 @@ namespace Business.Abstract
 
         bool Update(Worker worker);
 
+        bool Delete(Worker worker);
+
     }
 }

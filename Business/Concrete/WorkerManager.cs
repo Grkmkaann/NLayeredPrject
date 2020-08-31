@@ -24,6 +24,7 @@ namespace Business.Concrete
             return _workerDal.Add(worker);
         }
 
+
         public List<Worker> GetAll()
         {
             return _workerDal.GetAll();
@@ -34,5 +35,12 @@ namespace Business.Concrete
         {
             return _workerDal.Update(worker);
         }
+
+
+        public bool Delete(Worker worker)
+        {
+            return _workerDal.Delete(worker);
+        }
+
     }
 }
