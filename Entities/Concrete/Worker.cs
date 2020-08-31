@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Entities.Concrete
 {
-    public class Worker: IEntity
+    public class Worker: EntityBase, IEntity
     {
-        [Required]
+        [Key]
         public int RecordNumber { get; set; }
         [Required,MaxLength(50)]
         public string Name { get; set; }
@@ -20,12 +21,14 @@ namespace Entities.Concrete
         public DateTime StartDateOfWork { get; set; }
         public DateTime DismissalDate { get; set; }
         [Required]
-        public Int16 DepartmantCode { get; set; }
+        public int DepartmantCode { get; set; }
         [Required, MaxLength(50)]
         public string DepartmantName { get; set; }
+        [Required, MaxLength(5)]
+        public string Gender { get; set; }
         [Required]
-        public Int16 MobilePhoneNumber { get; set; }
-        public Int16 HomePhoneNumber { get; set; }
+        public string MobilePhoneNumber { get; set; }
+        public string HomePhoneNumber { get; set; }
         [Required]
         public int TitleCode { get; set; }
         [Required, MaxLength(50)]

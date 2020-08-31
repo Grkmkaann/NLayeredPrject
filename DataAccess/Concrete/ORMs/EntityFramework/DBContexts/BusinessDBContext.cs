@@ -12,5 +12,6 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.DBContexts
     {
         public DbSet<Worker> Workers { get; set; }
         public DbSet<Title> Titles { get; set; }
+        public DbSet<Departmant> Departmants { get; set; }
     }
 }

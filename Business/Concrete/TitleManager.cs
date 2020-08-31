@@ -10,24 +10,16 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class WorkerManager : IWorkerService
+    public class TitleManager : ITitleService
     {
-
-        private IWorkerDal _workerDal;
-        public WorkerManager()
+        private ITitleDal _titleDal;
+        public TitleManager()
         {
-            _workerDal = new EfWorkerDal();
+            _titleDal = new EfTitleDal();
         }
-
-        public bool Add(Worker worker)
+        public List<Title> GetAll()
         {
-            return _workerDal.Add(worker);
-        }
-
-        public List<Worker> GetAll()
-        {
-            return _workerDal.GetAll();
-           
+          return  _titleDal.GetAll();
         }
     }
 }

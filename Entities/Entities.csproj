@@ -43,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IEntity.cs" />
+    <Compile Include="Concrete\Departmant.cs" />
+    <Compile Include="Concrete\Base\EntityBase.cs" />
     <Compile Include="Concrete\Product.cs" />
     <Compile Include="Concrete\Title.cs" />
     <Compile Include="Concrete\Worker.cs" />

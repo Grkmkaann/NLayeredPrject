@@ -24,7 +24,7 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
                 {
                     return context.Set<TEntity>().ToList();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return null;
                 }
@@ -43,7 +43,7 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
                 {
                     context.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return false;
                 }

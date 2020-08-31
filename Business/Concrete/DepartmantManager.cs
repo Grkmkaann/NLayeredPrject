@@ -10,24 +10,16 @@ using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
-    public class WorkerManager : IWorkerService
+    public class DepartmantManager : IDepartmantService
     {
-
-        private IWorkerDal _workerDal;
-        public WorkerManager()
+        private IDepartmantDal _departmantDal;
+        public DepartmantManager()
         {
-            _workerDal = new EfWorkerDal();
+            _departmantDal = new EfDepartmantDal();
         }
-
-        public bool Add(Worker worker)
+        public List<Departmant> GetAll()
         {
-            return _workerDal.Add(worker);
-        }
-
-        public List<Worker> GetAll()
-        {
-            return _workerDal.GetAll();
-           
+           return _departmantDal.GetAll();
         }
     }
 }
