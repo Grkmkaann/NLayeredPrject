@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,24 +20,35 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().ToList();
-            }
-        }
-        public TEntity Get(int id)
-        {
-            using (TContext context = new TContext())
-            {
-                return context.Set<TEntity>().SingleOrDefault();
+                try
+                {
+                    return context.Set<TEntity>().ToList();
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+             
             }
         }
 
-        public void Add(TEntity entity)
+
+        public bool Add(TEntity entity)
         {
             using (TContext context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+
+                return true;
             }
         }
 
@@ -62,9 +74,12 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
             }
         }
 
-
-     
-
-  
+        public TEntity Get(Expression<Func<TEntity, bool>> expression)
+        {
+            using (TContext context = new TContext())
+            {
+                return context.Set<TEntity>().SingleOrDefault(expression);
+            }
+        }
     }
 }

@@ -17,10 +17,12 @@ namespace FormUI
     {
 
         IProductService _productManager;
+        IWorkerService _workerManager;
         public OperationsUI()
         {
             InitializeComponent();
-            _productManager=  new ProductManager();
+            _productManager= new ProductManager();
+            _workerManager = new WorkerManager();
         }
 
         private void OperationsUI_Load(object sender, EventArgs e)
@@ -31,9 +33,15 @@ namespace FormUI
 
         private void LoadDgwList()
         {
-            var productList = _productManager.GetAll();
-            dgwList.DataSource = productList;
+            //var productList = _productManager.GetAll();
+            //dgwList.DataSource = productList;
+
+            var workerList = _workerManager.GetAll();
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
