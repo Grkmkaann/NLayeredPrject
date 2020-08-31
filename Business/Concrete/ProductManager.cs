@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Abstract.DataAccessObjects;
+using DataAccess.Concrete.ORMs.EntityFramework.DataAccessLayers;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,9 @@ namespace Business.Concrete
 
         private IProductDal _productDal;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager()
         {
-            _productDal = productDal; 
+            _productDal = new EfProductDal(); 
         }
 
         public List<Product> GetAll()

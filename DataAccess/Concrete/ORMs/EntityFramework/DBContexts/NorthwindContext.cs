@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.ORMs.EntityFramework.DBContexts
 {
-    class NorthwindContext: DbContext
+    public class NorthwindContext: DbContext
     {
         public DbSet<Product> Products { get; set; }
 

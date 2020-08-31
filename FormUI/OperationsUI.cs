@@ -20,7 +20,7 @@ namespace FormUI
         public OperationsUI()
         {
             InitializeComponent();
-            _productManager=  new ProductManager(new EfProductDal());
+            _productManager=  new ProductManager();
         }
 
         private void OperationsUI_Load(object sender, EventArgs e)
