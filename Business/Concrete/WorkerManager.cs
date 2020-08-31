@@ -1,7 +1,9 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using DataAccess.Abstract.DataAccessObjects;
 using DataAccess.Concrete.ORMs.EntityFramework.DataAccessLayers;
 using Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,12 @@ namespace Business.Concrete
 
         public bool Add(Worker worker)
         {
+            WorkerValidator validator = new WorkerValidator();
+            var result = validator.Validate(worker);
+            if (result.Errors.Count > 0)
+            {
+                throw new ValidationException(result.Errors);
+            }
             return _workerDal.Add(worker);
         }
 
@@ -33,6 +41,12 @@ namespace Business.Concrete
 
         public bool Update(Worker worker)
         {
+            WorkerValidator validator = new WorkerValidator();
+            var result = validator.Validate(worker);
+            if (result.Errors.Count > 0)
+            {
+                throw new ValidationException(result.Errors);
+            }
             return _workerDal.Update(worker);
         }
 

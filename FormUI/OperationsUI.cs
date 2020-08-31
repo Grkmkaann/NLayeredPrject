@@ -143,14 +143,6 @@ namespace FormUI
         {
             bool result = false;
 
-
-            if (cbxGenderUpdate.SelectedItem == null)
-            {
-                MessageBox.Show("Please Choose a Gender");
-               
-            }
-            else
-            {
                   using (Worker worker = new Worker())
                 {
                     worker.RecordNumber = Convert.ToInt32(dgwList.CurrentRow.Cells[0].Value);
@@ -176,15 +168,13 @@ namespace FormUI
                     try
                     {
                         result = _workerManager.Update(worker);
-                        if (result) { MessageBox.Show("Record Updated! " ); }   
+                        if (result) { MessageBox.Show("Record Updated!"); }   
 
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Record Not Updated: "+ex.Message);
-                    }
-                
-                }
+                    } 
             }
             LoadDgwList();
         }

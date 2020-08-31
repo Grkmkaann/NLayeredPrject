@@ -12,9 +12,7 @@ namespace Business.Abstract
 
         List<Worker> GetAll();
         bool Add(Worker worker);
-
         bool Update(Worker worker);
-
         bool Delete(Worker worker);
 
     }
