@@ -13,5 +13,7 @@ namespace Business.Abstract
         List<Worker> GetAll();
         bool Add(Worker worker);
 
+        bool Update(Worker worker);
+
     }
 }

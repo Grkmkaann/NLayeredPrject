@@ -53,13 +53,22 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
         }
 
 
-        public void Update(TEntity entity)
+        public bool Update(TEntity entity)
         {
             using (TContext context = new TContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                return true;
+           
             }
         }
 

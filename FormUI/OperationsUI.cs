@@ -21,6 +21,7 @@ namespace FormUI
         IWorkerService _workerManager;
         ITitleService _titleManager;
         IDepartmantService _departmantsManager;
+        private bool _dismissDate;
         public OperationsUI()
         {
             InitializeComponent();
@@ -45,66 +46,182 @@ namespace FormUI
 
         private void LoadTitles()
         {
-            var titleList = _titleManager.GetAll();
-                foreach (var title in titleList)
-                {
-                using (ComboBoxItem comboBoxItem = new ComboBoxItem())
-                {
-                    comboBoxItem.Text = title.Name;
-                    comboBoxItem.Value = title.Code;
-                    cbxTitleName.Items.Add(comboBoxItem);
-                }
-            }
+            cbxTitleName.DataSource = _titleManager.GetAll();
+            cbxTitleName.DisplayMember = "Name";
+            cbxTitleName.ValueMember = "Code";
+
+            cbxTitleNameUpdate.DataSource = _titleManager.GetAll();
+            cbxTitleNameUpdate.DisplayMember = "Name";
+            cbxTitleNameUpdate.ValueMember = "Code";
+
+            //foreach (var title in titleList)
+            //    {
+            //    using (ComboBoxItem comboBoxItem = new ComboBoxItem())
+            //    {
+            //        comboBoxItem.Text = title.Name;
+            //        comboBoxItem.Value = title.Code;
+            //        cbxTitleName.Items.Add(comboBoxItem);
+            //    }
+            //}
         }
+        private void LoadDgwList()
+        {
+            var workerList = _workerManager.GetAll();
+            dgwList.DataSource = workerList;
+        }
+
 
         private void LoadDepartmants()
         {
-           var departmantList = _departmantsManager.GetAll();
-                foreach (var departmant in departmantList)
-                {
-                using (ComboBoxItem comboBoxItem = new ComboBoxItem())
-                {
-                    comboBoxItem.Text = departmant.Name;
-                    comboBoxItem.Value = departmant.Code;
-                    cbxDepartmantName.Items.Add(comboBoxItem);
-                }
-            }
+            cbxDepartmantName.DataSource = _departmantsManager.GetAll(); ;
+            cbxDepartmantName.DisplayMember = "Name";
+            cbxDepartmantName.ValueMember = "Code";
+
+            cbxDepartmantUpdate.DataSource = _departmantsManager.GetAll(); ;
+            cbxDepartmantUpdate.DisplayMember = "Name";
+            cbxDepartmantUpdate.ValueMember = "Code";
+
+            //foreach (var departmant in departmantList)
+            //    {
+            //    using (ComboBoxItem comboBoxItem = new ComboBoxItem())
+            //    {
+            //        comboBoxItem.Text = departmant.Name;
+            //        comboBoxItem.Value = departmant.Code;
+            //        cbxDepartmantName.Items.Add(comboBoxItem);
+            //        cbxDepartmantUpdate.Items.Add(comboBoxItem);
+            //    }
+            //}
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            bool result;
             using (Worker worker = new Worker())
             {
                 worker.Name = tbxName.Text;
                 worker.Surname = tbxSurname.Text;
                 worker.StartDateOfWork = Convert.ToDateTime(dtpStartDateOfWork.Text);
                 worker.DismissalDate = new DateTime();
-                worker.DepartmantCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantName.SelectedItem).Value);
-                worker.DepartmantName = ((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantName.SelectedItem).Text;
+                //worker.DepartmantCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantName.SelectedItem).Value);
+                //worker.DepartmantName = ((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantName.SelectedItem).Text;
+                worker.DepartmantCode = Convert.ToInt16(cbxDepartmantName.SelectedValue);
+                worker.DepartmantName = cbxDepartmantName.Text;
                 worker.Gender = cbxGender.SelectedItem.ToString();
                 worker.MobilePhoneNumber = tbxMobilePhoneNumer.Text;
                 worker.HomePhoneNumber = tbxMobileHomeNumer.Text;
-                worker.TitleCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Value);
-                worker.TitleName = ((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Text;
-                worker.EmailAdress = tbxEmail.Text;     
-            _workerManager.Add(worker);
-            };
-            LoadDgwList();
+                //worker.TitleCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Value);
+                //worker.TitleName = ((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Text;
+                worker.TitleCode = Convert.ToInt16(cbxTitleName.SelectedValue);
+                worker.TitleName = cbxTitleName.Text;
+                worker.EmailAdress = tbxEmail.Text;
+
+                try
+                {
+                    result = _workerManager.Add(worker);
+                    if (result)
+                    {
+                        MessageBox.Show("Record Added");
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("Record Not Added: "+ex.Message);
+                }
+             
+            }
+
+          
+                LoadDgwList();
         }
   
 
 
-    private void LoadDgwList()
-    {
-        //var productList = _productManager.GetAll();
-        //dgwList.DataSource = productList;
+   
 
-        var workerList = _workerManager.GetAll();
-        dgwList.DataSource = workerList;
-    }
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            bool result = false;
 
 
+            if (cbxGenderUpdate.SelectedItem == null)
+            {
+                MessageBox.Show("Please Choose a Gender");
+               
+            }
+            else
+            {
+                  using (Worker worker = new Worker())
+                {
+                    worker.RecordNumber = Convert.ToInt32(dgwList.CurrentRow.Cells[0].Value);
+                    worker.Name = tbxNameUpdate.Text;
+                    worker.Surname = tbxSurnameUpdate.Text;
+                    worker.StartDateOfWork = Convert.ToDateTime(dtpStartDateOfWorkUpdate.Text);
+                    if (_dismissDate)
+                    {
+                        worker.DismissalDate = Convert.ToDateTime(dtpDismissDateUpdate.Text);
+                    }
+                    //worker.DepartmantCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantUpdate.SelectedItem).Value);
+                    //worker.DepartmantName = ((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantName.SelectedItem).Text;
+                    worker.DepartmantCode = Convert.ToInt16(cbxDepartmantUpdate.SelectedValue);
+                    worker.DepartmantName = cbxDepartmantUpdate.Text;
+                    worker.Gender = cbxGenderUpdate.SelectedItem.ToString();
+                    worker.MobilePhoneNumber = tbxMobilePhoneNumberUpdate.Text;
+                    worker.HomePhoneNumber = tbxMobilePhoneNumberUpdate.Text;
+                    //worker.TitleCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Value);
+                    //worker.TitleName = ((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Text;
+                    worker.TitleCode = Convert.ToInt16(cbxTitleNameUpdate.SelectedValue);
+                    worker.TitleName = cbxTitleNameUpdate.Text;
+                    worker.EmailAdress = tbxEmailAdressUpdate.Text;
+                    try
+                    {
+                        result = _workerManager.Update(worker);
+                        if (result) { MessageBox.Show("Record Updated! " ); }   
 
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Record Not Updated: "+ex.Message);
+                    }
+                
+                }
+            }
+
+
+            LoadDgwList();
+
+
+
+        }
+
+
+        private void dgwList_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = dgwList.CurrentRow;
+            tbxNameUpdate.Text = row.Cells[1].Value.ToString();
+            tbxSurnameUpdate.Text = row.Cells[2].Value.ToString();
+            dtpStartDateOfWorkUpdate.Text = row.Cells[3].Value.ToString();
+            cbxDepartmantUpdate.SelectedValue = Convert.ToInt32(row.Cells[5].Value);
+            cbxGenderUpdate.SelectedValue = row.Cells[7].Value;
+            tbxMobilePhoneNumberUpdate.Text = row.Cells[8].Value.ToString();
+            tbxHomePhoneNumberUpdate.Text = row.Cells[9].Value.ToString();
+
+            cbxTitleNameUpdate.SelectedValue = Convert.ToInt32(row.Cells[10].Value);
+            tbxEmailAdressUpdate.Text = row.Cells[12].Value.ToString();
+
+
+            //worker.StartDateOfWork = Convert.ToDateTime(dtpStartDateOfWork.Text);
+            //worker.DismissalDate = new DateTime();
+            //worker.DepartmantCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantName.SelectedItem).Value);
+            //worker.DepartmantName = ((FormUI.OperationsUI.ComboBoxItem)cbxDepartmantName.SelectedItem).Text;
+            //worker.Gender = cbxGender.SelectedItem.ToString();
+            //worker.MobilePhoneNumber = tbxMobilePhoneNumer.Text;
+            //worker.HomePhoneNumber = tbxMobileHomeNumer.Text;
+            //worker.TitleCode = Convert.ToInt16(((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Value);
+            //worker.TitleName = ((FormUI.OperationsUI.ComboBoxItem)cbxTitleName.SelectedItem).Text;
+            //worker.EmailAdress = tbxEmail.Text;
+
+        }
 
 
         private class ComboBoxItem : IDisposable
@@ -151,6 +268,12 @@ namespace FormUI
             }
             #endregion
         }
+
+        private void dtpDismissDateUpdate_ValueChanged(object sender, EventArgs e)
+        {
+            _dismissDate = true;
+        }
+
 
 
     }

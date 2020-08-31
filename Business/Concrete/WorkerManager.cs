@@ -29,5 +29,10 @@ namespace Business.Concrete
             return _workerDal.GetAll();
            
         }
+
+        public bool Update(Worker worker)
+        {
+            return _workerDal.Update(worker);
+        }
     }
 }
