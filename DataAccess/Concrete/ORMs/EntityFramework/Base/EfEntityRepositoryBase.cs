@@ -16,13 +16,22 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
     {
 
 
-        public List<TEntity> GetAll()
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> expression = null)
         {
             using (TContext context = new TContext())
             {
                 try
                 {
-                    return context.Set<TEntity>().ToList();
+                    if (expression != null)
+                    {
+                        return context.Set<TEntity>().Where(expression).ToList();
+                    }
+                    else
+                    {
+                        return context.Set<TEntity>().ToList();
+                    }
+
+                  
                 }
                 catch (Exception ex)
                 {
@@ -32,6 +41,9 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
             }
         }
 
+
+
+   
 
         public bool Add(TEntity entity)
         {
@@ -99,5 +111,7 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.Base
                 return context.Set<TEntity>().SingleOrDefault(expression);
             }
         }
+
+
     }
 }

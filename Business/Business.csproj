@@ -45,11 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IDepartmantService.cs" />
-    <Compile Include="Abstract\IProductService.cs" />
     <Compile Include="Abstract\ITitleService.cs" />
     <Compile Include="Abstract\IWorkerService.cs" />
     <Compile Include="Concrete\DepartmantManager.cs" />
-    <Compile Include="Concrete\ProductManager.cs" />
     <Compile Include="Concrete\TitleManager.cs" />
     <Compile Include="Concrete\WorkerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

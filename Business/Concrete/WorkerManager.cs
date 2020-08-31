@@ -21,6 +21,13 @@ namespace Business.Concrete
             _workerDal = new EfWorkerDal();
         }
 
+        public List<Worker> GetAll()
+        {
+            return _workerDal.GetAll();
+
+        }
+
+
         public bool Add(Worker worker)
         {
             WorkerValidator validator = new WorkerValidator();
@@ -32,12 +39,6 @@ namespace Business.Concrete
             return _workerDal.Add(worker);
         }
 
-
-        public List<Worker> GetAll()
-        {
-            return _workerDal.GetAll();
-           
-        }
 
         public bool Update(Worker worker)
         {
@@ -55,6 +56,10 @@ namespace Business.Concrete
         {
             return _workerDal.Delete(worker);
         }
-
+        
+        public List<Worker> GetWorkersByDepartmanents(int departmentCode)
+        {
+            return _workerDal.GetAll(w => w.DepartmantCode == departmentCode);
+        }
     }
 }

@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\DataAccessObjects\IDepartmantDal.cs" />
-    <Compile Include="Abstract\DataAccessObjects\IProductDal.cs" />
     <Compile Include="Abstract\DataAccessObjects\ITitleDal.cs" />
     <Compile Include="Abstract\DataAccessObjects\IWorkerDal.cs" />
     <Compile Include="Abstract\Repositories\IEntityRepository.cs" />
@@ -62,7 +61,6 @@
     <Compile Include="Concrete\ORMs\EntityFramework\DataAccessLayers\EfWorkerDal.cs" />
     <Compile Include="Concrete\ORMs\EntityFramework\DBContexts\BusinessDBContext.cs" />
     <Compile Include="Concrete\ORMs\EntityFramework\DBContexts\NorthwindContext.cs" />
-    <Compile Include="Concrete\ORMs\EntityFramework\DataAccessLayers\EfProductDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

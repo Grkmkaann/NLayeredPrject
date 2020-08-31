@@ -72,9 +72,21 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.lblNameUpdate = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.cbxDepartmantNameQuery = new System.Windows.Forms.ComboBox();
+            this.lblSearchByDepartmentName = new System.Windows.Forms.Label();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.gbxFilterDetail = new System.Windows.Forms.GroupBox();
+            this.cbxFilterDepartment = new System.Windows.Forms.ComboBox();
+            this.cbxFilterTitle = new System.Windows.Forms.ComboBox();
+            this.lblFilterTitle = new System.Windows.Forms.Label();
+            this.lblFilterDepartment = new System.Windows.Forms.Label();
+            this.dtpFilterStartDateOfWork = new System.Windows.Forms.DateTimePicker();
+            this.lblFilterStartDateOfWork = new System.Windows.Forms.Label();
+            this.btnFilterDetails = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwList)).BeginInit();
             this.gbxAdd.SuspendLayout();
             this.gbxUpdate.SuspendLayout();
+            this.gbxFilterDetail.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgwList
@@ -85,9 +97,9 @@
             this.dgwList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.dgwList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgwList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwList.Location = new System.Drawing.Point(12, 34);
+            this.dgwList.Location = new System.Drawing.Point(12, 86);
             this.dgwList.Name = "dgwList";
-            this.dgwList.Size = new System.Drawing.Size(1393, 345);
+            this.dgwList.Size = new System.Drawing.Size(1393, 337);
             this.dgwList.TabIndex = 0;
             this.dgwList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgwList_CellClick);
             // 
@@ -112,7 +124,7 @@
             this.gbxAdd.Controls.Add(this.tbxName);
             this.gbxAdd.Controls.Add(this.btnAdd);
             this.gbxAdd.Controls.Add(this.lblName);
-            this.gbxAdd.Location = new System.Drawing.Point(12, 414);
+            this.gbxAdd.Location = new System.Drawing.Point(539, 436);
             this.gbxAdd.Name = "gbxAdd";
             this.gbxAdd.Size = new System.Drawing.Size(395, 291);
             this.gbxAdd.TabIndex = 1;
@@ -311,7 +323,7 @@
             this.gbxUpdate.Controls.Add(this.tbxNameUpdate);
             this.gbxUpdate.Controls.Add(this.btnUpdate);
             this.gbxUpdate.Controls.Add(this.lblNameUpdate);
-            this.gbxUpdate.Location = new System.Drawing.Point(1010, 414);
+            this.gbxUpdate.Location = new System.Drawing.Point(1010, 436);
             this.gbxUpdate.Name = "gbxUpdate";
             this.gbxUpdate.Size = new System.Drawing.Size(395, 313);
             this.gbxUpdate.TabIndex = 2;
@@ -507,7 +519,7 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(1258, 385);
+            this.btnDelete.Location = new System.Drawing.Point(1264, 51);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(141, 23);
             this.btnDelete.TabIndex = 11;
@@ -515,11 +527,122 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // cbxDepartmantNameQuery
+            // 
+            this.cbxDepartmantNameQuery.FormattingEnabled = true;
+            this.cbxDepartmantNameQuery.Location = new System.Drawing.Point(155, 58);
+            this.cbxDepartmantNameQuery.Name = "cbxDepartmantNameQuery";
+            this.cbxDepartmantNameQuery.Size = new System.Drawing.Size(147, 21);
+            this.cbxDepartmantNameQuery.TabIndex = 12;
+            this.cbxDepartmantNameQuery.SelectedIndexChanged += new System.EventHandler(this.cbxDepartmantNameQuery_SelectedIndexChanged);
+            // 
+            // lblSearchByDepartmentName
+            // 
+            this.lblSearchByDepartmentName.AutoSize = true;
+            this.lblSearchByDepartmentName.Location = new System.Drawing.Point(9, 61);
+            this.lblSearchByDepartmentName.Name = "lblSearchByDepartmentName";
+            this.lblSearchByDepartmentName.Size = new System.Drawing.Size(140, 13);
+            this.lblSearchByDepartmentName.TabIndex = 13;
+            this.lblSearchByDepartmentName.Text = "Search by department name";
+            this.lblSearchByDepartmentName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(308, 57);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 14;
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // gbxFilterDetail
+            // 
+            this.gbxFilterDetail.Controls.Add(this.cbxFilterDepartment);
+            this.gbxFilterDetail.Controls.Add(this.cbxFilterTitle);
+            this.gbxFilterDetail.Controls.Add(this.lblFilterTitle);
+            this.gbxFilterDetail.Controls.Add(this.lblFilterDepartment);
+            this.gbxFilterDetail.Controls.Add(this.dtpFilterStartDateOfWork);
+            this.gbxFilterDetail.Controls.Add(this.lblFilterStartDateOfWork);
+            this.gbxFilterDetail.Controls.Add(this.btnFilterDetails);
+            this.gbxFilterDetail.Location = new System.Drawing.Point(12, 436);
+            this.gbxFilterDetail.Name = "gbxFilterDetail";
+            this.gbxFilterDetail.Size = new System.Drawing.Size(395, 131);
+            this.gbxFilterDetail.TabIndex = 15;
+            this.gbxFilterDetail.TabStop = false;
+            this.gbxFilterDetail.Text = "Filter Detail";
+            // 
+            // cbxFilterDepartment
+            // 
+            this.cbxFilterDepartment.FormattingEnabled = true;
+            this.cbxFilterDepartment.Location = new System.Drawing.Point(124, 34);
+            this.cbxFilterDepartment.Name = "cbxFilterDepartment";
+            this.cbxFilterDepartment.Size = new System.Drawing.Size(147, 21);
+            this.cbxFilterDepartment.TabIndex = 4;
+            // 
+            // cbxFilterTitle
+            // 
+            this.cbxFilterTitle.FormattingEnabled = true;
+            this.cbxFilterTitle.Location = new System.Drawing.Point(124, 63);
+            this.cbxFilterTitle.Name = "cbxFilterTitle";
+            this.cbxFilterTitle.Size = new System.Drawing.Size(147, 21);
+            this.cbxFilterTitle.TabIndex = 8;
+            // 
+            // lblFilterTitle
+            // 
+            this.lblFilterTitle.AutoSize = true;
+            this.lblFilterTitle.Location = new System.Drawing.Point(11, 66);
+            this.lblFilterTitle.Name = "lblFilterTitle";
+            this.lblFilterTitle.Size = new System.Drawing.Size(58, 13);
+            this.lblFilterTitle.TabIndex = 18;
+            this.lblFilterTitle.Text = "Title Name";
+            this.lblFilterTitle.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblFilterDepartment
+            // 
+            this.lblFilterDepartment.AutoSize = true;
+            this.lblFilterDepartment.Location = new System.Drawing.Point(11, 37);
+            this.lblFilterDepartment.Name = "lblFilterDepartment";
+            this.lblFilterDepartment.Size = new System.Drawing.Size(93, 13);
+            this.lblFilterDepartment.TabIndex = 8;
+            this.lblFilterDepartment.Text = "Departmant Name";
+            this.lblFilterDepartment.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // dtpFilterStartDateOfWork
+            // 
+            this.dtpFilterStartDateOfWork.Location = new System.Drawing.Point(124, 92);
+            this.dtpFilterStartDateOfWork.Name = "dtpFilterStartDateOfWork";
+            this.dtpFilterStartDateOfWork.Size = new System.Drawing.Size(174, 20);
+            this.dtpFilterStartDateOfWork.TabIndex = 3;
+            // 
+            // lblFilterStartDateOfWork
+            // 
+            this.lblFilterStartDateOfWork.AutoSize = true;
+            this.lblFilterStartDateOfWork.Location = new System.Drawing.Point(11, 99);
+            this.lblFilterStartDateOfWork.Name = "lblFilterStartDateOfWork";
+            this.lblFilterStartDateOfWork.Size = new System.Drawing.Size(98, 13);
+            this.lblFilterStartDateOfWork.TabIndex = 5;
+            this.lblFilterStartDateOfWork.Text = "Start Date Of Work";
+            this.lblFilterStartDateOfWork.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // btnFilterDetails
+            // 
+            this.btnFilterDetails.Location = new System.Drawing.Point(314, 99);
+            this.btnFilterDetails.Name = "btnFilterDetails";
+            this.btnFilterDetails.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterDetails.TabIndex = 10;
+            this.btnFilterDetails.Text = "Filter";
+            this.btnFilterDetails.UseVisualStyleBackColor = true;
+            // 
             // OperationsUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1417, 739);
+            this.ClientSize = new System.Drawing.Size(1417, 783);
+            this.Controls.Add(this.gbxFilterDetail);
+            this.Controls.Add(this.btnFilter);
+            this.Controls.Add(this.cbxDepartmantNameQuery);
+            this.Controls.Add(this.lblSearchByDepartmentName);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.gbxUpdate);
             this.Controls.Add(this.gbxAdd);
@@ -533,7 +656,10 @@
             this.gbxAdd.PerformLayout();
             this.gbxUpdate.ResumeLayout(false);
             this.gbxUpdate.PerformLayout();
+            this.gbxFilterDetail.ResumeLayout(false);
+            this.gbxFilterDetail.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -583,6 +709,17 @@
         private System.Windows.Forms.DateTimePicker dtpDismissDateUpdate;
         private System.Windows.Forms.Label lblDismissDate;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ComboBox cbxDepartmantNameQuery;
+        private System.Windows.Forms.Label lblSearchByDepartmentName;
+        private System.Windows.Forms.Button btnFilter;
+        private System.Windows.Forms.GroupBox gbxFilterDetail;
+        private System.Windows.Forms.ComboBox cbxFilterDepartment;
+        private System.Windows.Forms.ComboBox cbxFilterTitle;
+        private System.Windows.Forms.Label lblFilterTitle;
+        private System.Windows.Forms.Label lblFilterDepartment;
+        private System.Windows.Forms.DateTimePicker dtpFilterStartDateOfWork;
+        private System.Windows.Forms.Label lblFilterStartDateOfWork;
+        private System.Windows.Forms.Button btnFilterDetails;
     }
 }
 

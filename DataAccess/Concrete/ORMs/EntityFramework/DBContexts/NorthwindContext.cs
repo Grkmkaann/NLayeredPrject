@@ -10,7 +10,7 @@ namespace DataAccess.Concrete.ORMs.EntityFramework.DBContexts
 {
     public class NorthwindContext: DbContext
     {
-        public DbSet<Product> Products { get; set; }
+
 
 
     }

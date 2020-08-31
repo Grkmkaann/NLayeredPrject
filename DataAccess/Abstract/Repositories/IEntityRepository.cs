@@ -11,11 +11,12 @@ namespace DataAccess.Abstract.Repositories
     public interface IEntityRepository<T> where T:class, IEntity, new()
     {
 
-        List<T> GetAll();
+        List<T> GetAll(Expression<Func<T, bool>> expression=null);
         T Get(Expression<Func<T,bool>> expression);
         bool Add(T entity);
         bool Update(T entity);
         bool Delete(T entity);
+
 
     }
 }

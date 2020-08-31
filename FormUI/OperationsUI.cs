@@ -17,7 +17,6 @@ namespace FormUI
     public partial class OperationsUI : Form
     {
 
-        IProductService _productManager;
         IWorkerService _workerManager;
         ITitleService _titleManager;
         IDepartmantService _departmantsManager;
@@ -54,6 +53,10 @@ namespace FormUI
             cbxTitleNameUpdate.DisplayMember = "Name";
             cbxTitleNameUpdate.ValueMember = "Code";
 
+            cbxDepartmantNameQuery.DataSource = _departmantsManager.GetAll();
+            cbxDepartmantNameQuery.DisplayMember = "Name";
+            cbxDepartmantNameQuery.ValueMember = "Code";
+
             //foreach (var title in titleList)
             //    {
             //    using (ComboBoxItem comboBoxItem = new ComboBoxItem())
@@ -70,6 +73,13 @@ namespace FormUI
             dgwList.DataSource = workerList;
         }
 
+        private void LoadDgwListFiltered(int departmentCode)
+        {
+            var workerList = _workerManager.GetWorkersByDepartmanents(departmentCode);
+            dgwList.DataSource = workerList;
+        }
+
+
 
         private void LoadDepartmants()
         {
@@ -80,6 +90,9 @@ namespace FormUI
             cbxDepartmantUpdate.DataSource = _departmantsManager.GetAll(); ;
             cbxDepartmantUpdate.DisplayMember = "Name";
             cbxDepartmantUpdate.ValueMember = "Code";
+
+          
+
 
             //foreach (var departmant in departmantList)
             //    {
@@ -278,6 +291,18 @@ namespace FormUI
                 }
 
             }
+        }
+
+        private void cbxDepartmantNameQuery_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            var filter = Convert.ToInt32(cbxDepartmantNameQuery.SelectedValue);
+            LoadDgwListFiltered(filter);
         }
     }
 
